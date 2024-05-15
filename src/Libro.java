@@ -12,10 +12,12 @@ public class Libro {
 
     // Master
     public Libro(String titolo, String autore, int numeroPagine) {
-        this.titolo = titolo;
+        /*this.titolo = titolo;
         this.autore = autore;
-        this.numeroPagine = numeroPagine;
-
+        this.numeroPagine = numeroPagine;*/
+        setTitolo(titolo);
+        setAutore(autore);
+        setNumeroPagine(numeroPagine);
     }
 
     // Copia
@@ -32,6 +34,10 @@ public class Libro {
 
     // Set titolo
     public void setTitolo(String titolo) {
+        if (titolo.isEmpty()) {
+            System.out.println("errore");
+            return;
+        }
         this.titolo = titolo;
     }
 
@@ -94,5 +100,32 @@ public class Libro {
     public Libro getCopyDeep() {
         return new Libro(getTitolo(), getAutore(), getNumeroPagine());
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Libro other = (Libro) obj;
+        if (titolo == null) {
+            if (other.titolo != null)
+                return false;
+        } else if (!titolo.equals(other.titolo))
+            return false;
+        if (autore == null) {
+            if (other.autore != null)
+                return false;
+        } else if (!autore.equals(other.autore))
+            return false;
+        if (numeroPagine != other.numeroPagine)
+            return false;
+        return true;
+    }
+
+    
 }
 

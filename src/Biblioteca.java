@@ -1,6 +1,6 @@
 public class Biblioteca {
-    private int nLibri = 1000;
-    private Libro [] volumi;
+    private final int nLibri = 1000; // Final maiuscolo
+    private Libro[] volumi;
 
     public Biblioteca() {
         volumi = new Libro[nLibri];
@@ -27,7 +27,7 @@ public class Biblioteca {
     public int AddLibro(Libro l, int posizione) {
         if (posizione < 0 || posizione >= nLibri) {
             return -1;
-        } else if (volumi[posizione] == null) {
+        } else if (volumi[posizione] != null) {
             return -2;
         } else {
             volumi[posizione] = new Libro(l);
@@ -48,14 +48,9 @@ public class Biblioteca {
 
     public int ricercaPerAutore(String autore) {
         int libroTrovato = 0;
-        boolean r = false;
         for (int i = 0; i < volumi.length; i++) {
-            r = false;
             if (volumi[i].getAutore().equals(autore)) {
-                libroTrovato ++;
-                r = true;
-            } if (i == volumi.length && r == false) {
-                libroTrovato = -1;
+                libroTrovato++;
             }
         }
         return libroTrovato;
@@ -70,4 +65,18 @@ public class Biblioteca {
         }
         return conta;
     }
+
+    public String toString() {
+        String s ="";
+        for (int i = 0; i < volumi.length; i++) {
+            s += "Autore: " + volumi[i].getAutore(); 
+        }
+        return s;
+    }
+
+    public void setVolumi(Libro[] volumi) {
+        this.volumi = volumi;
+    }
+
+    
 }
